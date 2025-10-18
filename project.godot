@@ -21,10 +21,13 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 [dialogic]
 
 directories/dch_directory={
+"Aysel": "res://characters/Aysel.dch",
+"Chip": "res://characters/Chip.dch",
+"Kathay": "res://characters/Kathay.dch",
+"Langley": "res://characters/Langley.dch",
 "unit_test_character": "res://Tests/Resources/unit_test_character.dch"
 }
 directories/dtl_directory={
-"timeline": "res://timeline.dtl",
 "timelines/timeline": "res://timelines/timeline.dtl"
 }
 layout/style_directory={}
