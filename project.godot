@@ -23,7 +23,10 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 directories/dch_directory={
 "unit_test_character": "res://Tests/Resources/unit_test_character.dch"
 }
-directories/dtl_directory={}
+directories/dtl_directory={
+"timeline": "res://timeline.dtl",
+"timelines/timeline": "res://timelines/timeline.dtl"
+}
 layout/style_directory={}
 
 [editor_plugins]
