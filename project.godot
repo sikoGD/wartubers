@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="WarTubers"
+run/main_scene="uid://cc8shg5d66ij2"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,8 +25,7 @@ directories/dch_directory={
 "Aysel": "res://characters/Aysel.dch",
 "Chip": "res://characters/Chip.dch",
 "Kathay": "res://characters/Kathay.dch",
-"Langley": "res://characters/Langley.dch",
-"unit_test_character": "res://Tests/Resources/unit_test_character.dch"
+"Langley": "res://characters/Langley.dch"
 }
 directories/dtl_directory={
 "timelines/timeline": "res://timelines/timeline.dtl"

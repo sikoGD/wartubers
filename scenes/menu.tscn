@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://cc8shg5d66ij2"]
+
+[ext_resource type="Script" uid="uid://dtx3k8hjjh1hw" path="res://scripts/menu.gd" id="1_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://y0s2b5q1srlb" path="res://assets/placeholder logo.png" id="2_g3eks"]
+[ext_resource type="Texture2D" uid="uid://bskjcceuy66f0" path="res://assets/StartButton PH.png" id="3_v86rl"]
+[ext_resource type="Texture2D" uid="uid://bgv0okp1qyas8" path="res://assets/OptionButton PH.png" id="4_13sgg"]
+[ext_resource type="Texture2D" uid="uid://dwl6vixt6vsa8" path="res://assets/QuitButton PH.png" id="5_i6lef"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_70i5f"]
+texture = ExtResource("2_g3eks")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mj5lg"]
+texture = ExtResource("3_v86rl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ufwb2"]
+texture = ExtResource("4_13sgg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6cdou"]
+texture = ExtResource("5_i6lef")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ytvr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_70i5f")
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 392.0
+offset_top = 392.0
+offset_right = 688.0
+offset_bottom = 536.0
+focus_neighbor_top = NodePath("../QuitButton")
+theme_override_styles/normal = SubResource("StyleBoxTexture_mj5lg")
+
+[node name="OptionsButton" type="Button" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 312.0
+offset_top = 424.0
+offset_right = 632.0
+offset_bottom = 592.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_ufwb2")
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 392.0
+offset_top = 496.0
+offset_right = 768.0
+offset_bottom = 664.0
+focus_neighbor_bottom = NodePath("../StartButton")
+theme_override_styles/normal = SubResource("StyleBoxTexture_6cdou")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 272.0
+offset_top = -272.0
+offset_right = 395.0
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
