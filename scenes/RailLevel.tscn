@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxy50rcapws4m"]
+
+[ext_resource type="Script" uid="uid://djq0v3ghrupi6" path="res://scripts/rail/rail_controller.gd" id="1_kysl7"]
+
+[sub_resource type="Curve3D" id="Curve3D_imnly"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_kysl7")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_imnly")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+
+[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.372294, 1.55608)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg448pp10cn0d"]
+
+[ext_resource type="Script" uid="uid://c18wu07p0r2tp" path="res://scripts/combat/cover_point.gd" id="1_p4x2u"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_p4x2u")
