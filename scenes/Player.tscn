@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://6m4xx7bts6rt"]
+
+[ext_resource type="Script" uid="uid://dv1e8lfi1rr67" path="res://scripts/combat/player_controller.gd" id="1_p0vlq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5q5h1"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_p0vlq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("BoxShape3D_5q5h1")
