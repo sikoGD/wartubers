@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://main123"]
+
+[ext_resource type="Script" uid="uid://do6vb0iutkfg2" path="res://scripts/game_manager.gd" id="1_game"]
+[ext_resource type="PackedScene" uid="uid://player123" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://enemy123" path="res://scenes/enemy_drone.tscn" id="3_enemy"]
+[ext_resource type="PackedScene" uid="uid://ui123" path="res://scenes/ui/combat_ui.tscn" id="4_ui"]
+[ext_resource type="Script" uid="uid://cxncx00v7xrmd" path="res://scripts/rail_controller.gd" id="5_tbgi4"]
+
+[sub_resource type="Curve3D" id="Curve3D_tbgi4"]
+
+[sub_resource type="Environment" id="Environment_tbgi4"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_game")
+
+[node name="Path" type="Path3D" parent="."]
+curve = SubResource("Curve3D_tbgi4")
+
+[node name="PathFollow" type="PathFollow3D" parent="Path"]
+transform = Transform3D(-0.0525002, -0.0876558, -0.994766, 0, 0.99614, -0.0877769, 0.998621, -0.00460831, -0.0522976, 3.09102, 0.272598, 0.162748)
+loop = false
+
+[node name="Player" parent="Path/PathFollow" instance=ExtResource("2_player")]
+
+[node name="RailCamera" type="Camera3D" parent="Path/PathFollow" node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(0.999262, 2.36695e-10, 0.0384127, -0.00337174, 0.99614, 0.0877121, -0.0382644, -0.0877769, 0.995405, -0.000244608, 0.000150317, 3.10728)
+script = ExtResource("5_tbgi4")
+follow_target = NodePath("../Player")
+
+[node name="Enemy" parent="." instance=ExtResource("3_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+
+[node name="UI" parent="." instance=ExtResource("4_ui")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tbgi4")

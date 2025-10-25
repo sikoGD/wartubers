@@ -4,7 +4,7 @@ func _ready():
 	$StartButton.grab_focus()
 
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene("#")
+	get_tree().change_scene("res://scenes/main.tscn")
 
 
 func _on_options_button_pressed() -> void:
