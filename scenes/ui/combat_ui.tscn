@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://ui123"]
+
+[ext_resource type="Script" uid="uid://bjxsliqyjivom" path="res://scripts/combat_ui.gd" id="1_n7134"]
+
+[node name="CombatUI" type="CanvasLayer"]
+script = ExtResource("1_n7134")
+
+[node name="HPBar" type="ProgressBar" parent="."]
+anchors_preset = -1
+anchor_right = 0.3
+anchor_bottom = 0.05
+value = 100.0
+
+[node name="EncounterText" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+text = "ENCOUNTER INCOMING..."
