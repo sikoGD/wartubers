@@ -9,9 +9,10 @@ var camera: Camera3D
 
 @onready var sprite: Sprite3D = $Sprite
 @onready var muzzle_flash_scene: PackedScene = preload("res://scenes/effects/muzzle_flash.tscn")
+@onready var aim_controller: Node = $AimController
 
 func _ready() -> void:
-	# Create a simple camera if not found (for testing)
+	# Try to find camera automatically
 	camera = get_viewport().get_camera_3d()
 	if camera == null:
 		var cam = Camera3D.new()
@@ -21,30 +22,41 @@ func _ready() -> void:
 		camera = cam
 	print("🎯 Player ready.")
 
-func start_combat():
+func start_combat() -> void:
 	in_combat = true
 	print("🔫 Combat mode: active")
+
+func end_combat() -> void:
+	in_combat = false
+	print("✅ Combat mode: ended")
 
 func _process(delta: float) -> void:
 	if not in_combat:
 		return
 
-	# Aim where the mouse points
-	if camera:
-		var mouse_pos = get_viewport().get_mouse_position()
-		var from = camera.project_ray_origin(mouse_pos)
-		var to = from + camera.project_ray_normal(mouse_pos) * max_range
-		var space_state = get_world_3d().direct_space_state
-		var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, to))
+	if not camera:
+		return
 
-		if result:
-			var target_pos = result.position
-			look_at(target_pos, Vector3.UP)
-			# Shoot when LMB pressed
-			if Input.is_action_pressed("shoot") and can_shoot:
-				_shoot(from, to, result)
-		else:
-			look_at(to, Vector3.UP)
+	# Raycast from mouse position
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = camera.project_ray_origin(mouse_pos)
+	var to = from + camera.project_ray_normal(mouse_pos) * max_range
+	var space_state = get_world_3d().direct_space_state
+	var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, to))
+
+	if result:
+		var target_pos = result.position
+		look_at(target_pos, Vector3.UP)
+
+		# 🟢 Update crosshair to follow aim point
+		_update_crosshair(target_pos)
+
+		# Fire
+		if Input.is_action_pressed("shoot") and can_shoot:
+			_shoot(from, to, result)
+	else:
+		look_at(to, Vector3.UP)
+		_update_crosshair(to)
 
 func _shoot(from: Vector3, to: Vector3, result: Dictionary) -> void:
 	can_shoot = false
@@ -57,7 +69,7 @@ func _shoot(from: Vector3, to: Vector3, result: Dictionary) -> void:
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
 
-func _spawn_muzzle_flash():
+func _spawn_muzzle_flash() -> void:
 	if not muzzle_flash_scene:
 		return
 	var flash = muzzle_flash_scene.instantiate()
@@ -66,5 +78,21 @@ func _spawn_muzzle_flash():
 	await get_tree().create_timer(0.1).timeout
 	flash.queue_free()
 
-func _play_shoot_effect():
+func _play_shoot_effect() -> void:
 	print("🔫 Pew!")
+
+# 🧩 Crosshair follow system
+func _update_crosshair(world_point: Vector3) -> void:
+	if not camera:
+		return
+
+	# Try to find the UI layer in the main scene
+	var ui_root = get_tree().get_root().get_node_or_null("Main/UI")
+	if not ui_root or not ui_root.has_node("Crosshair"):
+		return
+
+	var crosshair = ui_root.get_node("Crosshair")
+	var screen_pos = camera.unproject_position(world_point)
+
+	# Adjust position to center crosshair on the point
+	crosshair.position = screen_pos - crosshair.size * 0.5
