@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ui123"]
+[gd_scene load_steps=3 format=3 uid="uid://ui123"]
 
 [ext_resource type="Script" uid="uid://bjxsliqyjivom" path="res://scripts/combat_ui.gd" id="1_n7134"]
+[ext_resource type="Texture2D" uid="uid://ccor556ooduae" path="res://assets/10996672.png" id="2_21fn4"]
 
 [node name="CombatUI" type="CanvasLayer"]
 script = ExtResource("1_n7134")
@@ -19,3 +20,18 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 text = "ENCOUNTER INCOMING..."
+
+[node name="Crosshair" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_21fn4")

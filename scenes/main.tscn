@@ -9,6 +9,7 @@
 [sub_resource type="Curve3D" id="Curve3D_tbgi4"]
 
 [sub_resource type="Environment" id="Environment_tbgi4"]
+ambient_light_source = 3
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_game")
@@ -26,6 +27,9 @@ loop = false
 transform = Transform3D(0.999262, 2.36695e-10, 0.0384127, -0.00337174, 0.99614, 0.0877121, -0.0382644, -0.0877769, 0.995405, -0.000244608, 0.000150317, 3.10728)
 script = ExtResource("5_tbgi4")
 follow_target = NodePath("../Player")
+offset_back_explore = -2.5
+offset_back_combat = -1.5
+mouse_sensitivity = 0.8
 
 [node name="Enemy" parent="." instance=ExtResource("3_enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
