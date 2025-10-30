@@ -1,11 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://player123"]
 
 [ext_resource type="Script" uid="uid://cmhe2hpnby4j1" path="res://scripts/player_controller.gd" id="1_p0vlq"]
-[ext_resource type="Texture2D" uid="uid://de3mj2f2b7yhi" path="res://assets/player_placeholder.png" id="2_v6fml"]
+[ext_resource type="Texture2D" uid="uid://8520nrv4tx0i" path="res://assets/characters/sketches-character1.png" id="2_v6fml"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_p0vlq")
 
 [node name="Sprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.5, 0)
+pixel_size = 0.005
 billboard = 1
 texture = ExtResource("2_v6fml")

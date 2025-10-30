@@ -43,7 +43,18 @@ func _check_for_encounter() -> void:
 	if dist < 6.0 and not combat_mode:
 		_start_combat()
 
+
+
 func _start_combat() -> void:
+			# Zoom camera in for combat
+	var cam = $Path/PathFollow/RailCamera
+	if cam and cam.has_method("set_combat_mode"):
+		cam.set_combat_mode(true)
+
+# Show crosshair UI
+	if ui and ui.has_node("Crosshair"):
+		ui.get_node("Crosshair").visible = true
+		ui.call_deferred("show_crosshair", true)
 	moving = false
 	combat_mode = true
 	print("⚠️ Combat Encounter Started!")

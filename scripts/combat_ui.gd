@@ -2,6 +2,12 @@ extends CanvasLayer
 
 @onready var hp_bar: ProgressBar = $HPBar
 @onready var encounter_text: Label = $EncounterText
+@onready var crosshair: TextureRect = $Crosshair
+
+func show_crosshair(show: bool):
+	if crosshair:
+		crosshair.visible = show
+
 
 var encounter_fade_speed: float = 2.0
 var encounter_alpha: float = 0.0
