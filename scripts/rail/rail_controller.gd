@@ -50,6 +50,8 @@ func _process(delta: float) -> void:
 	if not follow_target:
 		return
 
+	# Look direction for aim
+	rotation_degrees = Vector3(pitch, yaw, 0)
 	# Smooth zoom
 	var target_offset = offset_back_combat if in_combat else offset_back_explore
 	current_offset_back = lerp(current_offset_back, target_offset, delta * zoom_speed)

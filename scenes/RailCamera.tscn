@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bujx82p8jltnc"]
+
+[ext_resource type="Script" uid="uid://cxncx00v7xrmd" path="res://scripts/rail_controller.gd" id="1_wx827"]
+
+[node name="RailCamera" type="Camera3D" node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(0.999262, 2.36695e-10, 0.0384127, -0.00337174, 0.99614, 0.0877121, -0.0382644, -0.0877769, 0.995405, 0, 0, 0)
+script = ExtResource("1_wx827")
+follow_target = NodePath("")
+offset_back_explore = -2.5
+offset_back_combat = -1.5
+mouse_sensitivity = 0.8
