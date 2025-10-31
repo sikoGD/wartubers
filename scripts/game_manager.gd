@@ -57,33 +57,43 @@ func _check_for_encounter() -> void:
 		_start_combat()
 
 func _start_combat() -> void:
-	moving = false
-	combat_mode = true
-	print("⚠️ Combat Encounter Started!")
+	if combat_mode:
+		return
 
-	# Camera zoom-in and enable combat mode
+	print("⚠️ Combat Encounter Triggered!")
+
+	# Stop path movement first to stabilize
+	moving = false
+	await get_tree().process_frame  # wait one frame for PathFollow to settle
+
+	combat_mode = true
+	print("🎯 Combat Mode Engaged")
+
+	# Lock player position before zoom
+	if player:
+		player.global_position = $Path/PathFollow.global_position
+
+	# Smoothly zoom camera and enter combat
 	if rail_camera and rail_camera.has_method("set_combat_mode"):
 		rail_camera.set_combat_mode(true)
 
-	# UI crosshair and label
+	# UI crosshair + label
 	if ui:
 		if ui.has_node("Crosshair"):
 			ui.get_node("Crosshair").visible = true
 		if ui.has_node("CombatLabel"):
 			ui.get_node("CombatLabel").text = "COMBAT MODE"
 
-	# Show encounter animation if available
-	if ui and ui.has_method("show_encounter"):
-		ui.call_deferred("show_encounter", true)
-	await get_tree().create_timer(1.5).timeout
-	if ui and ui.has_method("show_encounter"):
-		ui.call_deferred("show_encounter", false)
+	# Small cinematic delay for stability
+	await get_tree().create_timer(0.5).timeout
 
-	# Activate player and enemy combat
+	# Now safely start combat logic
 	if player.has_method("start_combat"):
 		player.start_combat()
 	if enemy.has_method("start_combat"):
 		enemy.start_combat()
+
+	print("🔫 Combat Started Cleanly")
 
 func end_combat() -> void:
 	print("🏁 Combat ended — returning to exploration mode.")
