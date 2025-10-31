@@ -54,3 +54,8 @@ func _die() -> void:
 	print("☠️ Enemy defeated!")
 	active = false
 	queue_free()
+
+	# 🏁 Inform GameManager that combat ended
+	var game_manager = get_tree().get_root().get_node_or_null("Main")
+	if game_manager and game_manager.has_method("end_combat"):
+		game_manager.end_combat()

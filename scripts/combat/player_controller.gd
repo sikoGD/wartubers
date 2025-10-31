@@ -54,6 +54,11 @@ func _shoot(from: Vector3, to: Vector3, result: Dictionary) -> void:
 	if result.has("collider") and result.collider.has_method("take_damage"):
 		result.collider.take_damage()
 
+		# Flash the crosshair red on hit
+		var cam = camera
+		if cam and cam.has_method("flash_crosshair_hit"):
+			cam.flash_crosshair_hit()
+
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
 
