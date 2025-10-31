@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ui123"]
+[gd_scene load_steps=2 format=3 uid="uid://ui123"]
 
 [ext_resource type="Script" uid="uid://bjxsliqyjivom" path="res://scripts/combat_ui.gd" id="1_n7134"]
-[ext_resource type="Texture2D" uid="uid://ccor556ooduae" path="res://assets/10996672.png" id="2_21fn4"]
 
 [node name="CombatUI" type="CanvasLayer"]
 script = ExtResource("1_n7134")
@@ -26,4 +25,3 @@ visible = false
 offset_right = 512.0
 offset_bottom = 512.0
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_21fn4")

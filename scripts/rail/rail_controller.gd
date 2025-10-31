@@ -36,6 +36,10 @@ func _ready():
 			if child is Area3D:
 				child.body_entered.connect(_on_body_entered)
 				child.body_exited.connect(_on_body_exited)
+				current_offset_back = offset_back_explore
+				yaw = follow_target.rotation_degrees.y
+				pitch = 0
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and mouse_locked:
@@ -50,33 +54,29 @@ func _process(delta: float) -> void:
 	if not follow_target:
 		return
 
-	# Look direction for aim
-	rotation_degrees = Vector3(pitch, yaw, 0)
-	# Smooth zoom
+	# Smooth zoom transition
 	var target_offset = offset_back_combat if in_combat else offset_back_explore
 	current_offset_back = lerp(current_offset_back, target_offset, delta * zoom_speed)
 
-	# Follow target position
+	# Desired offset (behind player)
 	var target_pos = follow_target.global_position
 	var camera_offset = Vector3(0, offset_up, -abs(current_offset_back))
 	var rotated_offset = camera_offset.rotated(Vector3.UP, deg_to_rad(yaw))
 
+	# Update camera position
 	global_position = target_pos + rotated_offset
+
+	# Apply rotation directly from yaw/pitch (manual look)
 	rotation_degrees = Vector3(pitch, yaw, 0)
-
-	# Look at target
-	look_at(target_pos + Vector3(0, offset_up * 0.5, 0))
-
-	# Smooth fade for crosshair
-	if crosshair:
-		var target_alpha = 1.0 if in_combat else 0.0
-		crosshair_alpha = lerp(crosshair_alpha, target_alpha, delta * crosshair_fade_speed)
-		crosshair.modulate.a = crosshair_alpha
 
 # === Manual control (if needed) ===
 func set_combat_mode(active: bool):
 	in_combat = active
-
+	if crosshair:
+		crosshair.visible = active
+	yaw = yaw # keeps current direction stable
+	pitch = clamp(pitch, -look_limit_v, look_limit_v)
+	
 # === Trigger zones ===
 func _on_body_entered(body):
 	if body.is_in_group("EnemyZone"):
@@ -85,6 +85,7 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if body.is_in_group("EnemyZone"):
 		set_combat_mode(false)
+		
 
 # === Crosshair overlay creation ===
 func _create_crosshair():
@@ -95,8 +96,11 @@ func _create_crosshair():
 	var overlay = Control.new()
 	overlay.name = "CrosshairOverlay"
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	overlay.visible = true
-	overlay.modulate = Color(1, 1, 1, 0) # Start invisible
+	overlay.anchor_left = 0.0
+	overlay.anchor_top = 0.0
+	overlay.anchor_right = 1.0
+	overlay.anchor_bottom = 1.0
+	overlay.visible = false
 
 	var label = Label.new()
 	label.text = "+"
@@ -104,17 +108,23 @@ func _create_crosshair():
 	label.add_theme_font_size_override("font_size", 36)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.anchor_left = 0.5
-	label.anchor_top = 0.5
-	label.anchor_right = 0.5
-	label.anchor_bottom = 0.5
-	label.offset_left = -10
-	label.offset_top = -10
-	label.offset_right = 10
-	label.offset_bottom = 10
+	label.set_anchors_preset(Control.PRESET_CENTER)
 
 	overlay.add_child(label)
 	get_tree().root.add_child(overlay)
-
 	crosshair = overlay
-	crosshair_label = label
+
+# 🔴 Flash crosshair when a hit is confirmed
+func flash_crosshair_hit():
+	if not crosshair:
+		return
+	var label := crosshair.get_child(0) as Label
+	if not label:
+		return
+
+	# Flash red instantly
+	label.add_theme_color_override("font_color", Color(1, 0, 0))
+
+	# Smoothly fade back to cyan
+	var tween := create_tween()
+	tween.tween_property(label, "modulate", Color(0, 1, 1), 0.25).from(Color(1, 0, 0))

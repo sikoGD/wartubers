@@ -5,7 +5,6 @@ extends Node3D
 @onready var enemy: Node3D = $Enemy
 @onready var rail_camera: Camera3D = $Path/PathFollow/Player/RailCamera
 @onready var ui: CanvasLayer = $UI
-@onready var combat_ui_script = ui.get_script()
 
 var moving: bool = true
 var combat_mode: bool = false
@@ -30,7 +29,7 @@ func _ready():
 	moving = true
 	combat_mode = false
 
-	# --- Assign AimController camera reference dynamically ---
+	# Assign AimController camera dynamically
 	var aim_controller = player.get_node_or_null("AimController")
 	if aim_controller:
 		aim_controller.camera_node = rail_camera
@@ -38,7 +37,7 @@ func _ready():
 	else:
 		push_warning("⚠️ AimController not found under Player!")
 
-	# UI setup
+	# Hide crosshair + set mode label
 	if ui.has_node("Crosshair"):
 		ui.get_node("Crosshair").visible = false
 	if ui.has_node("CombatLabel"):
@@ -62,26 +61,46 @@ func _start_combat() -> void:
 	combat_mode = true
 	print("⚠️ Combat Encounter Started!")
 
-	# Zoom camera in
+	# Camera zoom-in and enable combat mode
 	if rail_camera and rail_camera.has_method("set_combat_mode"):
 		rail_camera.set_combat_mode(true)
 
-	# UI crosshair + label
+	# UI crosshair and label
 	if ui:
 		if ui.has_node("Crosshair"):
 			ui.get_node("Crosshair").visible = true
 		if ui.has_node("CombatLabel"):
 			ui.get_node("CombatLabel").text = "COMBAT MODE"
 
-	# Optional: show encounter fade
+	# Show encounter animation if available
 	if ui and ui.has_method("show_encounter"):
 		ui.call_deferred("show_encounter", true)
 	await get_tree().create_timer(1.5).timeout
 	if ui and ui.has_method("show_encounter"):
 		ui.call_deferred("show_encounter", false)
 
-	# Start combat logic for player & enemy
+	# Activate player and enemy combat
 	if player.has_method("start_combat"):
 		player.start_combat()
 	if enemy.has_method("start_combat"):
 		enemy.start_combat()
+
+func end_combat() -> void:
+	print("🏁 Combat ended — returning to exploration mode.")
+	combat_mode = false
+	moving = true
+
+	# Reset UI
+	if ui:
+		if ui.has_node("Crosshair"):
+			ui.get_node("Crosshair").visible = false
+		if ui.has_node("CombatLabel"):
+			ui.get_node("CombatLabel").text = "EXPLORATION MODE"
+
+	# Reset camera zoom
+	if rail_camera and rail_camera.has_method("set_combat_mode"):
+		rail_camera.set_combat_mode(false)
+
+	# Reset player combat flag safely
+	if player and "in_combat" in player:
+		player.in_combat = false
