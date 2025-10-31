@@ -25,6 +25,10 @@ func _ready() -> void:
 func start_combat() -> void:
 	in_combat = true
 	print("🔫 Combat mode: active")
+	
+	# Slight shift to the left
+	var tween = create_tween()
+	tween.tween_property($Sprite, "position", Vector3(-0.7, -0.5, 0), 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	if camera and camera.has_method("set_combat_mode"):
 		camera.set_combat_mode(true)
@@ -32,6 +36,10 @@ func start_combat() -> void:
 func end_combat() -> void:
 	in_combat = false
 	print("✅ Combat mode: ended")
+	
+	var tween = create_tween()
+	tween.tween_property($Sprite, "position", Vector3.ZERO, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 	if camera and camera.has_method("set_combat_mode"):
 		camera.set_combat_mode(false)
