@@ -41,7 +41,7 @@ script = ExtResource("2_tefeu")
 transform = Transform3D(0.999262, -3.26186e-09, 0.0384126, -0.00337174, 0.996141, 0.0877122, -0.0382644, -0.087777, 0.995406, -0.000244608, 0.000150323, 3.10728)
 follow_target = NodePath("..")
 offset_back_explore = 2.5
-offset_back_combat = 1.2
+offset_back_combat = 2.0
 
 [node name="Enemy" parent="." instance=ExtResource("3_enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94675, 0, 31.953)

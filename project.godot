@@ -36,6 +36,10 @@ layout/style_directory={}
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 dialogic_default_action={
