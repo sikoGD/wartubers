@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpvw81e2f66hl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ubnb"]
+albedo_color = Color(1, 0.615686, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gt117"]
+material = SubResource("StandardMaterial3D_7ubnb")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7ubnb"]
+radius = 50.0
+
+[node name="shooter" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gt117")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("SphereShape3D_7ubnb")

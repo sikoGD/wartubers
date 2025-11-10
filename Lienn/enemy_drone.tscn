@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6bbf16b8f1xy"]
+
+[ext_resource type="Script" uid="uid://dpqcbb7o6sg6f" path="res://Lienn/enemy_controller.gd" id="1_1dao8"]
+[ext_resource type="Texture2D" uid="uid://dwp881af8kfal" path="res://assets/enemy_placeholder.png" id="2_fbs1i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcqnj"]
+albedo_texture = ExtResource("2_fbs1i")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.03526
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+material = SubResource("StandardMaterial3D_bcqnj")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_thy4s"]
+
+[node name="EnemyDrone" type="Node3D"]
+script = ExtResource("1_1dao8")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.49, 0, 0, 0, 2.49, 0, 0, 0, 2.49, 0, 0, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(2.49, 0, 0, 0, 2.49, 0, 0, 0, 2.49, 0, 0, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" groups=["EnemyZone"]]
+transform = Transform3D(2.49, 0, 0, 0, 2.49, 0, 0, 0, 2.49, 0, 0, 0)
+shape = SubResource("SphereShape3D_thy4s")

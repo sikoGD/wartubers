@@ -1,0 +1,335 @@
+[gd_scene load_steps=13 format=3 uid="uid://cxy50rcapws4m"]
+
+[ext_resource type="Script" uid="uid://dgohdvnq72mbh" path="res://Lienn/railLevel.gd" id="1_jvhjk"]
+[ext_resource type="PackedScene" uid="uid://bykb1kehhby7y" path="res://Lienn/camera.tscn" id="2_i1ojn"]
+[ext_resource type="PackedScene" uid="uid://dc6dfeoj283lu" path="res://Lienn/car.tscn" id="2_i1vrv"]
+[ext_resource type="PackedScene" uid="uid://piy2a1ygjbel" path="res://Lienn/chat.tscn" id="5_o07si"]
+[ext_resource type="PackedScene" uid="uid://latmtkfibnbu" path="res://Lienn/picture_aim.tscn" id="6_o13pq"]
+[ext_resource type="PackedScene" uid="uid://4127m7y7cd5p" path="res://Lienn/shooter_aim.tscn" id="7_g882x"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1vrv"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_imnly"]
+sky_material = SubResource("ProceduralSkyMaterial_i1vrv")
+
+[sub_resource type="Environment" id="Environment_i1ojn"]
+background_mode = 2
+sky = SubResource("Sky_imnly")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_imnly"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.014, 0, 0, 0, 0, 0, 0, 0, 0, 0.0563593, 0, -3.37455, -1.36401, -1.90735e-05, 3.17825, 1.36401, 1.90735e-05, -3.17825, 1.30073, -0.000263214, -13.8761, -1.35852, 0, 4.23428, 1.35852, 0, -4.23428, 7.87229, 0, -25.9498, -0.407948, 0, 4.24049, 0.407948, 0, -4.24049, 10.7896, 0, -36.2821, 0.5545, 0, 5.7274, -0.5545, 0, -5.7274, 12.0052, 0, -49.4101, 2.88822, 0, 3.88459, -2.88822, 0, -3.88459, 2.40226, 0, -65.6986, 1.47978, 0, 5.0411, -1.47978, 0, -5.0411, -5.89777, 0, -80.5777, -0.0795345, 0, 4.26308, 0.0795345, 0, -4.26308, -7.72111, 0, -100.756, -1.08198, 0, 6.1106, 1.08198, 0, -6.1106, -5.98704, 0, -129.587, -1.62291, 0, 7.50114, 1.62291, 0, -7.50114, 1.91409, 0, -152.682, 0.607182, 0, 7.56648, -0.607182, 0, -7.56648, 4.92704, 0, -186.741, 0.78735, 0, 7.97693, -0.78735, 0, -7.97693, 0.915693, 0, -206.798, 3.75373, 0, 9.36287, -3.75373, 0, -9.36287, 2.5313, 0, -254.321, 3.90146, 0, 7.14542, -3.90146, 0, -7.14542, -8.131, 0, -269.378, -0.690062, 0, 3.62778, 0.690062, 0, -3.62778, -11.6561, 0, -281.047, -3.35866, 0, 2.6124, 3.35866, 0, -2.6124, -2.9041, 0, -290.772, -4.18308, 0, 1.72696, 4.18308, 0, -1.72696, 17.3958, 0, -299.037, -5.21003, 0, 3.91238, 5.21003, 0, -3.91238, 34.4199, 0, -306.555, -3.42749, 0, 6.3956, 3.42749, 0, -6.3956, 54.355, 0, -325.883, 0.0780754, 0, 3.26996, -0.0780754, 0, -3.26996, 57.394, 0, -338.403, 4.60045, 0, 15.5247, -4.60045, 0, -15.5247, 53.0948, 0, -388.755, 8.34336, 0, 5.13098, -8.34336, 0, -5.13098, 28.3401, 0, -423.626, 16.1698, 0, 6.38718, -16.1698, 0, -6.38718, -90.0771, 0, -472.134, 12.9683, 0, 10.9869, -12.9683, 0, -10.9869, -232.749, 0, -536.336, 5.0446, 0, 14.1373, -5.0446, 0, -14.1373, -258.43, 0, -593.405, 3.45074, 0, 13.7321, -3.45074, 0, -13.7321, -294.097, 0, -674.728, -1.09863, 0, 8.94336, 1.09863, 0, -8.94336, -294.097, 0, -723.236, -4.16696, 0, 15.6348, 4.16696, 0, -15.6348, -286.964, 0, -777.451, -5.98029, 0, 16.8202, 5.98029, 0, -16.8202, -251.296, 0, -851.64, -2.49672, 0, 17.3818, 2.49672, 0, -17.3818, -217.055, 0, -981.471, -3.12999, 0, 15.7385, 3.12999, 0, -15.7385, -215.628, 0, -1045.67, -6.16582, 0, 9.79468, 6.16582, 0, -9.79468, -197.473, 0, -1073.59, -4.26746, 0, 9.6969, 4.26746, 0, -9.6969, -177.499, 0, -1109.26, -3.69257, 0, 17.58, 3.69257, 0, -17.58, -156.099, 0, -1162.05, 5.60457, 0, 15.1987, -5.60457, 0, -15.1987, -154.672, 0, -1231.95, 6.65329, 0, 10.0608, -6.65329, 0, -10.0608, -177.499, 0, -1271.9, 4.38246, 0, 10.5713, -4.38246, 0, -10.5713, -196.047, 0, -1314.7, 0.749695, 0, 18.2615, -0.749695, 0, -18.2615, -221.727, 0, -1378.91, -16.0967, 0, 22.2476, 16.0967, 0, -22.2476, -207.46, -0.00012207, -1451.67, -16.4627, 0, 16.3087, 16.4627, 0, -16.3087, -99.03, -0.00012207, -1493.04, 0, 0, 0, 0, 0, 0, -72.2226, -0.00012207, -1596.17, 0, 0, 0, 0, 0, 0, -30.8479, -0.00012207, -1726, 0, 0, 0, 0, 0, 0, -36.5547, -0.00012207, -1833, 0, 0, 0, 0, 0, 0, -53.6753, -0.00012207, -1927.16, 0, 0, 0, 0, 0, 0, -47.9684, -0.00012207, -2062.7, 0, 0, 0, 0, 0, 0, -52.2486, -0.00012207, -2181.12),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 47
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kysl7"]
+albedo_color = Color(0.108438, 0.313393, 0.185807, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_i1vrv"]
+material = SubResource("StandardMaterial3D_kysl7")
+size = Vector2(1000, 400)
+
+[node name="railLevel" type="Node3D"]
+script = ExtResource("1_jvhjk")
+pictureAimLimits = Vector2(157.5, 111)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i1ojn")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array(-20, -1, -20, 1, 20, 1, 20, -1)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 1.7
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="camera" parent="." instance=ExtResource("2_i1ojn")]
+transform = Transform3D(1, 0, 9.31323e-10, 0, 1, 0, -9.31323e-10, 0, 1, 0.014, 0, 0)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_imnly")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999826, 0, -0.0125504, 0, 1, 0, 0.0125504, 0, 0.999826, 0.014, 0, 0)
+
+[node name="car" parent="Path3D/PathFollow3D" instance=ExtResource("2_i1vrv")]
+transform = Transform3D(5.19459, 0, 0.0652054, 0, 5.195, 0, -0.0652054, 0, 5.19459, -0.0272535, 1.53663, -1.05574)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -150)
+mesh = SubResource("QuadMesh_i1vrv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -550)
+mesh = SubResource("QuadMesh_i1vrv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -950)
+mesh = SubResource("QuadMesh_i1vrv")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1350)
+mesh = SubResource("QuadMesh_i1vrv")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1750)
+mesh = SubResource("QuadMesh_i1vrv")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -2150)
+mesh = SubResource("QuadMesh_i1vrv")
+
+[node name="enemies" type="Node" parent="."]
+
+[node name="EnemyDrone" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -277.674, 9.76938, -542.847)
+script = null
+
+[node name="EnemyDrone2" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -233.675, 9.76938, -553.139)
+script = null
+
+[node name="EnemyDrone3" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -293.37, 9.76938, -628.271)
+script = null
+
+[node name="EnemyDrone4" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -249.371, 9.76938, -638.563)
+script = null
+
+[node name="EnemyDrone5" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -267.382, 9.76938, -850.324)
+script = null
+
+[node name="EnemyDrone6" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -223.383, 9.76938, -860.616)
+script = null
+
+[node name="EnemyDrone7" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -286.937, 9.76938, -743.028)
+script = null
+
+[node name="EnemyDrone8" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -280.505, 9.76938, -900.241)
+script = null
+
+[node name="EnemyDrone9" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -277.674, 9.76938, -542.847)
+script = null
+
+[node name="EnemyDrone10" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -233.675, 9.76938, -553.139)
+script = null
+
+[node name="EnemyDrone11" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -293.37, 9.76938, -628.271)
+script = null
+
+[node name="EnemyDrone12" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -249.371, 9.76938, -638.563)
+script = null
+
+[node name="EnemyDrone13" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -267.382, 9.76938, -850.324)
+script = null
+
+[node name="EnemyDrone14" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -223.383, 9.76938, -860.616)
+script = null
+
+[node name="EnemyDrone15" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -286.937, 9.76938, -743.028)
+script = null
+
+[node name="EnemyDrone16" parent="enemies"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -280.505, 9.76938, -900.241)
+script = null
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="shooterAim" parent="GUI" instance=ExtResource("7_g882x")]
+visible = false
+offset_left = 549.0
+offset_top = 311.0
+offset_right = 549.0
+offset_bottom = 311.0
+
+[node name="pictureAim" parent="GUI" instance=ExtResource("6_o13pq")]
+visible = false
+offset_left = 393.0
+offset_top = 196.0
+offset_right = 393.0
+offset_bottom = 196.0
+
+[node name="chat" parent="GUI" instance=ExtResource("5_o07si")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -328.0
+offset_top = -266.0
+offset_right = -328.0
+offset_bottom = -266.0
+grow_horizontal = 0
+grow_vertical = 0
