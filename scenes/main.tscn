@@ -1,0 +1,167 @@
+[gd_scene load_steps=12 format=3 uid="uid://main123"]
+
+[ext_resource type="Script" uid="uid://do6vb0iutkfg2" path="res://scripts/game_manager.gd" id="1_game"]
+[ext_resource type="PackedScene" uid="uid://player123" path="res://scenes/Player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://bbspjxnus3d27" path="res://scripts/rail_movement.gd" id="2_tefeu"]
+[ext_resource type="PackedScene" uid="uid://enemy123" path="res://scenes/enemy_drone.tscn" id="3_enemy"]
+[ext_resource type="PackedScene" uid="uid://bujx82p8jltnc" path="res://scenes/RailCamera.tscn" id="4_tefeu"]
+[ext_resource type="PackedScene" uid="uid://ui123" path="res://scenes/ui/combat_ui.tscn" id="4_ui"]
+
+[sub_resource type="Curve3D" id="Curve3D_tbgi4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0.897, 0.849, 0, 0, 0, 0, 0, 0, 0, -0.181, 10, 0, 0, 0, 0, 0, 0, 0, 0.637, 20, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0.345, 40),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Environment" id="Environment_tbgi4"]
+ambient_light_source = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_tefeu"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tefeu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_tefeu"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_game")
+
+[node name="Path" type="Path3D" parent="."]
+curve = SubResource("Curve3D_tbgi4")
+
+[node name="PathFollow" type="PathFollow3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.897, 0.849)
+rotation_mode = 0
+loop = false
+script = ExtResource("2_tefeu")
+
+[node name="Player" parent="Path/PathFollow" instance=ExtResource("2_player")]
+
+[node name="RailCamera" parent="Path/PathFollow/Player" node_paths=PackedStringArray("follow_target") instance=ExtResource("4_tefeu")]
+transform = Transform3D(0.999262, -3.26186e-09, 0.0384126, -0.00337174, 0.996141, 0.0877122, -0.0382644, -0.087777, 0.995406, -0.000244608, 0.000150323, 3.10728)
+follow_target = NodePath("..")
+offset_back_explore = 2.5
+offset_back_combat = 2.0
+
+[node name="Enemy" parent="." instance=ExtResource("3_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94675, 0, 31.953)
+
+[node name="UI" parent="." instance=ExtResource("4_ui")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tbgi4")
+
+[node name="Node3D" type="Node3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, 8.123, 10, 8.449)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, 7.401, 10, 16.1513)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 35.66, 0, 0, 0, 6.605, 13.953, 16.916, 16.151)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 35.66, 0, 0, 0, 6.605, 17.0762, 16.916, -14.9103)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, -21.6105, 10, 20.697)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, -21.008, 10, 12.485)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, -21.6105, 10, 4.86715)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, -21.008, 10, -3.34485)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(4.9859, 0, -3.59734, 0, 21.69, 0, 3.23788, 0, 5.53942, -17.008, 9, -10.881)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(7.32747, 0, -5.28681, 0, 31.875, 0, 4.75851, 0, 8.14097, -16.405, 10, -19.093)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(0.755399, 0, -6.55146, 0, 21.69, 0, 5.89681, 0, 0.839262, -7.606, 9, -18.413)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(0.755399, 0, -6.55146, 0, 21.69, 0, 5.89681, 0, 0.839262, -7.00362, 10, -26.6248)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(0.518141, 0, -6.57987, 0, 21.69, 0, 5.92238, 0, 0.575664, 0.223, 9, -18.413)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(0.518141, 0, -6.57987, 0, 25.61, 0, 5.92238, 0, 0.575664, 6.48, 10, -26.625)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, -17.753, 10, 62.3427)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5.945, 0, 0, 0, 21.69, 0, 0, 0, 6.605, -21.008, 10, 54.1307)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(4.99829, 0.567778, 0, -0.130282, 21.5827, -0.479229, -0.0125447, 2.07818, 4.97698, -25.79, 10, 35.539)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2491, -0.910302, 35.539)
+mesh = SubResource("CylinderMesh_tefeu")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5, 0, 0, 0, 21.69, 0, 0, 0, 5, -31.4318, 10, 35.539)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(5, 0, 0, 0, 21.69, 0, 0, 0, 5, -31.4318, 10, 29.5052)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(2.99803, 2.00141, 3.97479, -0.130282, 21.5827, -0.479229, -3.99936, 0.797234, 2.99522, 24.0459, 10, 62.7121)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(3.00908, 0, 3.99318, 0, 21.69, 0, -3.99318, 0, 3.00908, 18.4041, 10, 62.7121)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(3.00908, 0, 3.99318, 0, 21.69, 0, -3.99318, 0, 3.00908, 18.4041, 10, 56.6783)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(-0.292176, 0, -4.99146, 0, 21.69, 0, 4.99146, 0, -0.292176, 18.7146, 10, 31.0756)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(-0.292176, 0, -4.99146, 0, 21.69, 0, 4.99146, 0, -0.292176, 19.0443, 10, 25.4434)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(-0.292176, 0, -4.99146, 0, 21.69, 0, 4.99146, 0, -0.292176, 25.0678, 10, 25.796)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="WorldEnvironment/Node3D"]
+transform = Transform3D(150, 0, 0, 0, -3.92654, 149.949, 0, -149.949, -3.92654, 0, -1.5, 7.6071)
+mesh = SubResource("QuadMesh_tefeu")
