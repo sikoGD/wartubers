@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bykb1kehhby7y"]
+
+[ext_resource type="Script" uid="uid://dgmgb0nddm5xy" path="res://Lienn/camera.gd" id="1_d1xit"]
+
+[node name="camera" type="Node3D"]
+process_priority = -1
+process_physics_priority = -1
+transform = Transform3D(1, 0, 9.31323e-10, 0, 1, 0, -9.31323e-10, 0, 1, 0, 0, 0)
+script = ExtResource("1_d1xit")
+
+[node name="Cam" type="Camera3D" parent="."]
+transform = Transform3D(0.999921, 0, -0.0125516, 0, 1, 0, 0.0125516, 0, 0.999921, 0.150308, 9.51475, 6.12139)

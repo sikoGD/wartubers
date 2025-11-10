@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://piy2a1ygjbel"]
+
+[ext_resource type="PackedScene" uid="uid://d4iqch772sy3o" path="res://Lienn/chatInput.tscn" id="2_egn1g"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h38n4"]
+load_path = "res://.godot/imported/gui.png-cf97072018b2630e0bf587e4452bf721.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl75t"]
+atlas = SubResource("CompressedTexture2D_h38n4")
+region = Rect2(256, 256, 256, 256)
+
+[node name="chat" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+self_modulate = Color(0, 0, 0, 0.117647)
+clip_contents = true
+layout_mode = 0
+offset_right = 315.0
+offset_bottom = 254.0
+texture = SubResource("AtlasTexture_cl75t")
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 367.0
+offset_bottom = 229.135
+
+[node name="chatInput" parent="NinePatchRect/VBoxContainer" instance=ExtResource("2_egn1g")]
+clip_contents = true
+layout_mode = 2
+
+[node name="chatInput2" parent="NinePatchRect/VBoxContainer" instance=ExtResource("2_egn1g")]
+layout_mode = 2
+
+[node name="chatInput3" parent="NinePatchRect/VBoxContainer" instance=ExtResource("2_egn1g")]
+layout_mode = 2
+
+[node name="chatInput4" parent="NinePatchRect/VBoxContainer" instance=ExtResource("2_egn1g")]
+layout_mode = 2
+
+[node name="chatInput5" parent="NinePatchRect/VBoxContainer" instance=ExtResource("2_egn1g")]
+layout_mode = 2
+
+[node name="chatInput6" parent="NinePatchRect/VBoxContainer" instance=ExtResource("2_egn1g")]
+layout_mode = 2

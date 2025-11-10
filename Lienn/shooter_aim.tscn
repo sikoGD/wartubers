@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://4127m7y7cd5p"]
+
+[ext_resource type="Texture2D" uid="uid://cerbpye4o2boy" path="res://Lienn/gui.png" id="1_txx45"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txx45"]
+atlas = ExtResource("1_txx45")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isd31"]
+atlas = SubResource("AtlasTexture_txx45")
+region = Rect2(0, 0, 128, 128)
+
+[node name="shooterAim" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="aim" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_isd31")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc6dfeoj283lu"]
+
+[ext_resource type="PackedScene" uid="uid://cpvw81e2f66hl" path="res://Lienn/shooter.tscn" id="1_c35m8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0jew"]
+albedo_color = Color(0.562414, 0.17061, 0.154636, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c35m8"]
+material = SubResource("StandardMaterial3D_b0jew")
+
+[node name="car" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_c35m8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0.444926, 0.246949, 0)
+mesh = SubResource("BoxMesh_c35m8")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.5, 0, 0, 0, 1, -0.451181, 0.246949, 0)
+mesh = SubResource("BoxMesh_c35m8")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, 0.251282, -0.515817)
+mesh = SubResource("BoxMesh_c35m8")
+
+[node name="shooter" parent="." instance=ExtResource("1_c35m8")]
+transform = Transform3D(0.315, 0, 0, 0, 0.315, 0, 0, 0, 0.315, -0.275299, 0.30764, -0.324641)
